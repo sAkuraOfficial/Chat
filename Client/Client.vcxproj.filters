@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ui\Client\Client.cpp">
+      <Filter>ui\Client</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ui">
+      <UniqueIdentifier>{849f9d3b-2b7d-46a3-b810-5ae64bf0c386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\Client">
+      <UniqueIdentifier>{4d352f0a-b14c-45ce-b047-0d6b84582f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{5a523b57-f804-4600-a0bc-17c95aa1b368}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ui\Client\Client.ui">
+      <Filter>ui\Client</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Client.ico">
+      <Filter>res</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="res\Client.qrc">
+      <Filter>res</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\Client.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ui\Client\Client.h">
+      <Filter>ui\Client</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>

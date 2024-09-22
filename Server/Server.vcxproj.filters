@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ui\Server\Server.cpp">
+      <Filter>ui\Server</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ui">
+      <UniqueIdentifier>{534e1fe5-175d-436f-a2c6-cd24d5185562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\Server">
+      <UniqueIdentifier>{1a4164f2-3463-4520-9dff-06609432945f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res">
+      <UniqueIdentifier>{7c40db03-84bd-4d75-926c-7f9fbaebc480}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ui\Server\Server.h">
+      <Filter>ui\Server</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ui\Server\Server.ui">
+      <Filter>ui\Server</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\Server.ico">
+      <Filter>res</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="res\Server.qrc">
+      <Filter>res</Filter>
+    </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\Server.rc">
+      <Filter>res</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
