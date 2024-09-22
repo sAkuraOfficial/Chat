@@ -5,6 +5,9 @@
     <ClCompile Include="ui\Server\Server.cpp">
       <Filter>ui\Server</Filter>
     </ClCompile>
+    <ClCompile Include="protocol\protocol.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -15,6 +18,9 @@
     </Filter>
     <Filter Include="res">
       <UniqueIdentifier>{7c40db03-84bd-4d75-926c-7f9fbaebc480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{ca289413-3224-4188-b951-6f76cdf2f942}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +47,10 @@
     <ResourceCompile Include="res\Server.rc">
       <Filter>res</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="protocol\protocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

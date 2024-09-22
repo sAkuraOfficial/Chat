@@ -5,6 +5,9 @@
     <ClCompile Include="ui\Client\Client.cpp">
       <Filter>ui\Client</Filter>
     </ClCompile>
+    <ClCompile Include="protocol\protocol.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -15,6 +18,9 @@
     </Filter>
     <Filter Include="res">
       <UniqueIdentifier>{5a523b57-f804-4600-a0bc-17c95aa1b368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{3bf22ada-8e7c-4dce-a11a-4a2d294a1c8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,5 +47,10 @@
     <QtMoc Include="ui\Client\Client.h">
       <Filter>ui\Client</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="protocol\protocol.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

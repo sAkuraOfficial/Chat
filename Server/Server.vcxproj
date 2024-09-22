@@ -97,6 +97,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="protocol\protocol.cpp" />
     <ClCompile Include="ui\Server\Server.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="res\Server.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="protocol\protocol.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
