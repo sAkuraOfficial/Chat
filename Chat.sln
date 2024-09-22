@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{CBAE1E8E-C56D-45B7-8572-63CFE5E6C137}"
 	ProjectSection(SolutionItems) = preProject
 		.clang-format = .clang-format
+		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
