@@ -1,5 +1,6 @@
 #pragma once
 
+#include "protocol/protocol.h"
 #include "ui_Server.h"
 #include <QWebSocketServer>
 #include <QtWidgets/QMainWindow>
@@ -15,4 +16,11 @@ class Server : public QMainWindow
 
   private:
     Ui::ServerClass ui;
+    Protocol *m_pProtocol = nullptr;
+
+  private slots:
+    void recvLog(QString msg);
+
+  signals:
+    void newConnection();
 };

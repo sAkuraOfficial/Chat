@@ -47,10 +47,8 @@
     <QtMoc Include="ui\Client\Client.h">
       <Filter>ui\Client</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="protocol\protocol.h">
+    <QtMoc Include="protocol\protocol.h">
       <Filter>protocol</Filter>
-    </ClInclude>
+    </QtMoc>
   </ItemGroup>
 </Project>

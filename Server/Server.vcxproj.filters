@@ -27,6 +27,9 @@
     <QtMoc Include="ui\Server\Server.h">
       <Filter>ui\Server</Filter>
     </QtMoc>
+    <QtMoc Include="protocol\protocol.h">
+      <Filter>protocol</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ui\Server\Server.ui">
@@ -47,10 +50,5 @@
     <ResourceCompile Include="res\Server.rc">
       <Filter>res</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="protocol\protocol.h">
-      <Filter>protocol</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
