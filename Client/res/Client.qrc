@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="Client">
+    <qresource prefix="/Client">
+        <file alias="login_a">img/login_a.gif</file>
+        <file alias="login_b">img/login_b.gif</file>
     </qresource>
 </RCC>
