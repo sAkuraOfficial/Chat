@@ -14,7 +14,7 @@
     <ClCompile Include="server\server.cpp">
       <Filter>server</Filter>
     </ClCompile>
-    <ClCompile Include="logger\logger.cpp">
+    <ClCompile Include="..\Logger\logger.cpp">
       <Filter>logger</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,7 +57,7 @@
     <QtMoc Include="server\server.h">
       <Filter>server</Filter>
     </QtMoc>
-    <QtMoc Include="logger\logger.h">
+    <QtMoc Include="..\Logger\logger.h">
       <Filter>logger</Filter>
     </QtMoc>
   </ItemGroup>

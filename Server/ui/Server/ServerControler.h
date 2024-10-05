@@ -4,7 +4,7 @@
 #include "ui_ServerControler.h"
 #include <QtWidgets/QMainWindow>
 #include"server/server.h"
-#include"logger/logger.h"
+#include"../Logger/logger.h"
 class ServerControler : public QMainWindow
 {
     Q_OBJECT

@@ -245,8 +245,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Logger\logger.cpp" />
     <ClCompile Include="database\database.cpp" />
-    <ClCompile Include="logger\logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
     <ClCompile Include="server\server.cpp" />
@@ -280,7 +280,7 @@
     <QtMoc Include="server\server.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="logger\logger.h" />
+    <QtMoc Include="..\Logger\logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

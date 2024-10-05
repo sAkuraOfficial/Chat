@@ -1,7 +1,7 @@
 #pragma once
 
 #include "protocol/protocol.h"
-#include "ui_Client.h"
+#include "ui_ClientLogin.h"
 #include <QtWidgets/QMainWindow>
 #include <qevent.h>
 #include <qmovie.h>
@@ -16,7 +16,7 @@ class Client : public QMainWindow
     ~Client();
 
   private:
-    Ui::ClientClass ui;
+    Ui::ClientLoginClass ui;
     Protocol *m_pProtocol = nullptr;
     QMovie *movie;
     QMovie *movie_b;

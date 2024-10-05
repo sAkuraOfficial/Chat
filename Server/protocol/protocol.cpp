@@ -14,7 +14,6 @@ bool Protocol::listen(int port)
 {
     if (!m_pWebSocketServer->listen(QHostAddress::Any, port))
     {
-        Logger::getInstance().log(QString("服务器监听失败 %1").arg(port));
         return false;
     }
 
@@ -23,8 +22,6 @@ bool Protocol::listen(int port)
         m_pWebSocketServer, &QWebSocketServer::newConnection,
         this, &Protocol::onNewConnection
     );
-
-    Logger::getInstance().log(QString("服务器监听成功 %1").arg(port));
     return true;
 }
 
@@ -55,8 +52,7 @@ void Protocol::onTextMessageReceived(QString msg)
 
 void Protocol::router(QString msg, QWebSocket *sender)
 {
-    Logger::getInstance().log(QString("收到消息 %1").arg(msg));
-    sender->sendTextMessage("收到消息");
+    emit newClientMessage(msg, sender);
 }
 
 void Protocol::onDisconnected()

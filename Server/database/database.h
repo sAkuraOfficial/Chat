@@ -3,7 +3,7 @@
 #include <qmessagebox.h>
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
-#include"logger/logger.h"
+#include "../Logger/logger.h"
 class Database : public QObject
 {
     Q_OBJECT
