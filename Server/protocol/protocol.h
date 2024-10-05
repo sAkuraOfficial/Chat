@@ -1,11 +1,11 @@
 // 服务端
 #pragma once
+#include "../Logger/logger.h"
 #include <QObject>
 #include <QWebSocketServer>
 #include <qmessagebox.h>
 #include <qsqldatabase.h>
 #include <qwebsocket.h>
-#include"logger/logger.h"
 class Protocol : public QObject
 {
     Q_OBJECT
@@ -23,5 +23,6 @@ class Protocol : public QObject
     void onNewConnection();
     void onTextMessageReceived(QString msg);
     void onDisconnected();
-
+  signals:
+    void newClientMessage(QString msg, QWebSocket *sender); // 当收到客户端消息时发射此信号
 };

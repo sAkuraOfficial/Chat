@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ui\Client\Client.cpp">
-      <Filter>ui\Client</Filter>
-    </ClCompile>
     <ClCompile Include="protocol\protocol.cpp">
       <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ClientLogin\ClientLogin.cpp">
+      <Filter>ui\ClientLogin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Logger\logger.cpp">
+      <Filter>logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
       <UniqueIdentifier>{849f9d3b-2b7d-46a3-b810-5ae64bf0c386}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ui\Client">
-      <UniqueIdentifier>{4d352f0a-b14c-45ce-b047-0d6b84582f2c}</UniqueIdentifier>
     </Filter>
     <Filter Include="res">
       <UniqueIdentifier>{5a523b57-f804-4600-a0bc-17c95aa1b368}</UniqueIdentifier>
@@ -22,11 +22,15 @@
     <Filter Include="protocol">
       <UniqueIdentifier>{3bf22ada-8e7c-4dce-a11a-4a2d294a1c8b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="ui\Client\Client.ui">
-      <Filter>ui\Client</Filter>
-    </QtUic>
+    <Filter Include="ui\ClientLogin">
+      <UniqueIdentifier>{4d352f0a-b14c-45ce-b047-0d6b84582f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{086463c8-e2d0-49b7-9050-9fd3a526ab9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{195879e3-766d-46b4-bc90-2d9e40ff6c5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Client.ico">
@@ -44,11 +48,19 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ui\Client\Client.h">
-      <Filter>ui\Client</Filter>
-    </QtMoc>
     <QtMoc Include="protocol\protocol.h">
       <Filter>protocol</Filter>
     </QtMoc>
+    <QtMoc Include="ui\ClientLogin\ClientLogin.h">
+      <Filter>ui\ClientLogin</Filter>
+    </QtMoc>
+    <QtMoc Include="..\Logger\logger.h">
+      <Filter>logger</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ui\ClientLogin\ClientLogin.ui">
+      <Filter>ui\ClientLogin</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

@@ -245,15 +245,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Logger\logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
-    <ClCompile Include="ui\Client\Client.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="ui\Client\Client.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="ui\Client\Client.ui" />
+    <ClCompile Include="ui\ClientLogin\ClientLogin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Client.ico" />
@@ -266,6 +261,15 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="protocol\protocol.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ui\ClientLogin\ClientLogin.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="ui\ClientLogin\ClientLogin.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\Logger\logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

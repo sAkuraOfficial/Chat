@@ -11,11 +11,11 @@
     <ClCompile Include="database\database.cpp">
       <Filter>database</Filter>
     </ClCompile>
-    <ClCompile Include="server\server.cpp">
-      <Filter>server</Filter>
-    </ClCompile>
-    <ClCompile Include="logger\logger.cpp">
+    <ClCompile Include="..\Logger\logger.cpp">
       <Filter>logger</Filter>
+    </ClCompile>
+    <ClCompile Include="core\core.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -37,11 +37,11 @@
     <Filter Include="doc">
       <UniqueIdentifier>{0dc6ed32-65b7-4d57-8a8a-2d3622afdf29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="server">
-      <UniqueIdentifier>{266b921a-02fe-4ecd-91e7-1cb6098d9520}</UniqueIdentifier>
-    </Filter>
     <Filter Include="logger">
       <UniqueIdentifier>{4119d2cd-fabd-408f-95a2-c77f34c2b14b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{266b921a-02fe-4ecd-91e7-1cb6098d9520}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,11 +54,11 @@
     <QtMoc Include="database\database.h">
       <Filter>database</Filter>
     </QtMoc>
-    <QtMoc Include="server\server.h">
-      <Filter>server</Filter>
-    </QtMoc>
-    <QtMoc Include="logger\logger.h">
+    <QtMoc Include="..\Logger\logger.h">
       <Filter>logger</Filter>
+    </QtMoc>
+    <QtMoc Include="core\core.h">
+      <Filter>core</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

@@ -245,11 +245,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Logger\logger.cpp" />
+    <ClCompile Include="core\core.cpp" />
     <ClCompile Include="database\database.cpp" />
-    <ClCompile Include="logger\logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
-    <ClCompile Include="server\server.cpp" />
     <ClCompile Include="ui\Server\ServerControler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -277,10 +277,10 @@
     <None Include="doc\Chat.sql" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="server\server.h" />
+    <QtMoc Include="..\Logger\logger.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="logger\logger.h" />
+    <QtMoc Include="core\core.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

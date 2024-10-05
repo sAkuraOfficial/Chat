@@ -5,12 +5,12 @@
 #include <qmessagebox.h>
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
-class Server : public QObject
+class Core : public QObject
 {
     Q_OBJECT
   public:
-    Server(QObject *parent = nullptr);
-    ~Server();
+    Core(QObject *parent = nullptr);
+    ~Core();
     Protocol *getProtocol();
     Database *getDatabase();
     bool runServer(int port);
@@ -18,6 +18,10 @@ class Server : public QObject
   private:
     Protocol *m_pProtocol = nullptr;
     Database *m_pDatabase = nullptr;
+    void processLogin(QString msg, QWebSocket *sender);
+    void processRegister(QString msg, QWebSocket *sender);
+
   private slots:
+    void onNewMessage(QString msg, QWebSocket *sender);
   signals:
 };

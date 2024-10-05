@@ -3,8 +3,8 @@
 #include "protocol/protocol.h"
 #include "ui_ServerControler.h"
 #include <QtWidgets/QMainWindow>
-#include"server/server.h"
-#include"logger/logger.h"
+#include"core/core.h"
+#include"../Logger/logger.h"
 class ServerControler : public QMainWindow
 {
     Q_OBJECT
@@ -15,7 +15,7 @@ class ServerControler : public QMainWindow
 
   private:
     Ui::ServerControlerClass ui;
-    Server* m_server=nullptr;
+    Core* m_server=nullptr;
 
   private slots:
     void recvLog(QString msg);
