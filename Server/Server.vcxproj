@@ -82,7 +82,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.7.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;websockets</QtModules>
+    <QtModules>core;gui;widgets;sql;websockets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="QtSettings">
@@ -92,7 +92,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='test|x64'" Label="QtSettings">
     <QtInstall>6.7.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;websockets</QtModules>
+    <QtModules>core;gui;widgets;sql;websockets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='test|Win32'" Label="QtSettings">
@@ -102,7 +102,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.7.2_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;websockets</QtModules>
+    <QtModules>core;gui;widgets;sql;websockets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="QtSettings">
@@ -172,7 +172,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -196,7 +196,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -222,7 +222,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -245,15 +245,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="database\database.cpp" />
+    <ClCompile Include="logger\logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
-    <ClCompile Include="ui\Server\Server.cpp" />
+    <ClCompile Include="server\server.cpp" />
+    <ClCompile Include="ui\Server\ServerControler.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ui\Server\Server.h" />
+    <QtMoc Include="ui\Server\ServerControler.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="ui\Server\Server.ui" />
+    <QtUic Include="ui\Server\ServerControler.ui" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Server.ico" />
@@ -266,6 +269,18 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="protocol\protocol.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="database\database.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Chat.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="server\server.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="logger\logger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

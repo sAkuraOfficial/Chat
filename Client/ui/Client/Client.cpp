@@ -7,6 +7,11 @@ Client::Client(QWidget *parent)
     m_pProtocol = new Protocol("ws://localhost:1234", this);
     movie = new QMovie(":/Client/login_a");
     movie_b = new QMovie(":/Client/login_b");
+    ui.stackedWidget->setCurrentWidget(ui.page_login);
+
+    // gif_a与gif_b不显示
+    ui.gif_a->hide();
+    ui.gif_b->hide();
 
     ui.lineEdit_pwd->installEventFilter(this);
     ui.label_link_reg->installEventFilter(this);
@@ -14,11 +19,6 @@ Client::Client(QWidget *parent)
 
 Client::~Client()
 {
-}
-
-void Client::on_pushButton_clicked()
-{
-    m_pProtocol->test(ui.lineEdit_id->text());
 }
 
 bool Client::eventFilter(QObject *watched, QEvent *event)
@@ -34,6 +34,8 @@ bool Client::eventFilter(QObject *watched, QEvent *event)
             movie_b->setScaledSize(ui.gif_b->size());
             movie->start();
             movie_b->start();
+            ui.gif_a->show();
+            ui.gif_b->show();
         }
         else if (event->type() == QEvent::FocusOut)
         {
@@ -43,6 +45,8 @@ bool Client::eventFilter(QObject *watched, QEvent *event)
             ui.gif_b->clear();
             movie->stop();
             movie_b->stop();
+            ui.gif_a->hide();
+            ui.gif_b->hide();
         }
     }
     if (watched == ui.label_link_reg)
@@ -67,4 +71,9 @@ bool Client::eventFilter(QObject *watched, QEvent *event)
     }
 
     return QMainWindow::eventFilter(watched, event);
+}
+
+void Client::on_pushButton_login_clicked()
+{
+    m_pProtocol->test(ui.lineEdit_id->text());
 }

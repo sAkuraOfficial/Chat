@@ -2,11 +2,20 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ui\Server\Server.cpp">
+    <ClCompile Include="ui\Server\ServerControler.cpp">
       <Filter>ui\Server</Filter>
     </ClCompile>
     <ClCompile Include="protocol\protocol.cpp">
       <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="database\database.cpp">
+      <Filter>database</Filter>
+    </ClCompile>
+    <ClCompile Include="server\server.cpp">
+      <Filter>server</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\logger.cpp">
+      <Filter>logger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -22,17 +31,38 @@
     <Filter Include="protocol">
       <UniqueIdentifier>{ca289413-3224-4188-b951-6f76cdf2f942}</UniqueIdentifier>
     </Filter>
+    <Filter Include="database">
+      <UniqueIdentifier>{d84dd012-0088-45f4-bade-fde73f765fdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="doc">
+      <UniqueIdentifier>{0dc6ed32-65b7-4d57-8a8a-2d3622afdf29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="server">
+      <UniqueIdentifier>{266b921a-02fe-4ecd-91e7-1cb6098d9520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="logger">
+      <UniqueIdentifier>{4119d2cd-fabd-408f-95a2-c77f34c2b14b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ui\Server\Server.h">
+    <QtMoc Include="ui\Server\ServerControler.h">
       <Filter>ui\Server</Filter>
     </QtMoc>
     <QtMoc Include="protocol\protocol.h">
       <Filter>protocol</Filter>
     </QtMoc>
+    <QtMoc Include="database\database.h">
+      <Filter>database</Filter>
+    </QtMoc>
+    <QtMoc Include="server\server.h">
+      <Filter>server</Filter>
+    </QtMoc>
+    <QtMoc Include="logger\logger.h">
+      <Filter>logger</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="ui\Server\Server.ui">
+    <QtUic Include="ui\Server\ServerControler.ui">
       <Filter>ui\Server</Filter>
     </QtUic>
   </ItemGroup>
@@ -50,5 +80,10 @@
     <ResourceCompile Include="res\Server.rc">
       <Filter>res</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\Chat.sql">
+      <Filter>doc</Filter>
+    </None>
   </ItemGroup>
 </Project>

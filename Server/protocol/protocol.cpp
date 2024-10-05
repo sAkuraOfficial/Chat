@@ -14,7 +14,7 @@ bool Protocol::listen(int port)
 {
     if (!m_pWebSocketServer->listen(QHostAddress::Any, port))
     {
-        log(QString("服务器监听失败 %1").arg(port));
+        Logger::getInstance().log(QString("服务器监听失败 %1").arg(port));
         return false;
     }
 
@@ -24,13 +24,8 @@ bool Protocol::listen(int port)
         this, &Protocol::onNewConnection
     );
 
-    log(QString("服务器正在监听 %1").arg(port));
+    Logger::getInstance().log(QString("服务器监听成功 %1").arg(port));
     return true;
-}
-
-void Protocol::log(QString msg)
-{
-    emit logMessage(msg + "\n");
 }
 
 void Protocol::onNewConnection()
@@ -38,7 +33,7 @@ void Protocol::onNewConnection()
     QWebSocket *pSocket = m_pWebSocketServer->nextPendingConnection();
     if (!pSocket)
         return; // 无效连接
-    log(QString("新连接 %1").arg(pSocket->peerAddress().toString()));
+    Logger::getInstance().log(QString("新连接 %1").arg(pSocket->peerAddress().toString()));
     connect(
         pSocket, &QWebSocket::textMessageReceived,
         this, &Protocol::onTextMessageReceived
@@ -55,8 +50,13 @@ void Protocol::onTextMessageReceived(QString msg)
     QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
     if (!pClient)
         return;
-    log(QString("收到消息 %1").arg(msg));
-    pClient->sendTextMessage(msg + "\t已抄送");
+    router(msg, pClient);
+}
+
+void Protocol::router(QString msg, QWebSocket *sender)
+{
+    Logger::getInstance().log(QString("收到消息 %1").arg(msg));
+    sender->sendTextMessage("收到消息");
 }
 
 void Protocol::onDisconnected()
@@ -64,7 +64,7 @@ void Protocol::onDisconnected()
     QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
     if (!pClient)
         return;
-    log(QString("断开连接 %1").arg(pClient->peerAddress().toString()));
+    Logger::getInstance().log(QString("断开连接 %1").arg(pClient->peerAddress().toString()));
     m_clients.removeAll(pClient);
     pClient->deleteLater();
 }

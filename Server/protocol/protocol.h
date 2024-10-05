@@ -3,7 +3,9 @@
 #include <QObject>
 #include <QWebSocketServer>
 #include <qmessagebox.h>
+#include <qsqldatabase.h>
 #include <qwebsocket.h>
+#include"logger/logger.h"
 class Protocol : public QObject
 {
     Q_OBJECT
@@ -11,7 +13,8 @@ class Protocol : public QObject
     Protocol(QObject *parent = nullptr);
     ~Protocol();
     bool listen(int port);
-    void log(QString msg);
+
+    void router(QString msg, QWebSocket *sender);
 
   private:
     QWebSocketServer *m_pWebSocketServer = nullptr;
@@ -20,6 +23,5 @@ class Protocol : public QObject
     void onNewConnection();
     void onTextMessageReceived(QString msg);
     void onDisconnected();
-  signals:
-    void logMessage(QString msg);
+
 };

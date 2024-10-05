@@ -23,5 +23,5 @@ class Client : public QMainWindow
     bool isLoginPage = true;
 
   private slots:
-    void on_pushButton_clicked();
+    void on_pushButton_login_clicked();
 };

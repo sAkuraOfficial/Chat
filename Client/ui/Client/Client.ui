@@ -446,7 +446,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_5">
+           <widget class="QLineEdit" name="lineEdit_reg_id">
             <property name="minimumSize">
              <size>
               <width>200</width>
@@ -508,7 +508,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6">
+           <widget class="QLineEdit" name="lineEdit_reg_pwd">
             <property name="minimumSize">
              <size>
               <width>200</width>
@@ -539,7 +539,7 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,0,0,0,0">
+         <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0,0,0">
           <item>
            <spacer name="horizontalSpacer_19">
             <property name="orientation">
@@ -557,47 +557,25 @@
            </spacer>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_3">
+           <widget class="QCheckBox" name="checkBox_reg">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>30</height>
              </size>
             </property>
-            <property name="text">
-             <string>自动登录</string>
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::LeftToRight</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="checkBox_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">#checkBox_reg:hover{
+	color:red;
+}
+
+</string>
             </property>
             <property name="text">
-             <string>记住密码</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_10">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>找回密码</string>
+             <string>我承诺不发广告，文明交流，遵守法律规章制度</string>
             </property>
            </widget>
           </item>
@@ -647,7 +625,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pushButton_reg">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -655,7 +633,7 @@
              </size>
             </property>
             <property name="text">
-             <string>确认登录</string>
+             <string>确认注册</string>
             </property>
            </widget>
           </item>
@@ -739,10 +717,16 @@
     <property name="font">
      <font>
       <pointsize>10</pointsize>
+      <underline>true</underline>
      </font>
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label_link_reg{
+	text-decoration:underline;
+}</string>
     </property>
     <property name="text">
      <string>注册账号</string>
