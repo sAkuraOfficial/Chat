@@ -735,6 +735,36 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="label_link_status">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>316</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#label_link_reg{
+	text-decoration:underline;
+}</string>
+    </property>
+    <property name="text">
+     <string>服务器状态：连接中</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

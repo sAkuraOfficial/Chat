@@ -4,20 +4,25 @@
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <qwebsocket.h>
+
 class Protocol : public QObject
 {
     Q_OBJECT
   public:
-    Protocol(QString ws, QObject *parent = nullptr);
+    Protocol(QObject *parent = nullptr);
     ~Protocol();
-    void route(QString message);
-    void test(QString msg);
+    QWebSocket *getWebSocket();
+    void ConnectToServer(QString ws);
+    void sendMessage(QString msg);
+
   private:
     QWebSocket *m_pWebSocket;
     QString m_ws;
   private slots:
     void onConnected();
+    void onDisconnected();
     void onError(QAbstractSocket::SocketError error);
     void onTextMessageReceived(QString message);
-
+signals:
+    void newMessage(QString message);
 };

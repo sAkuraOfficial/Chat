@@ -172,7 +172,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -196,7 +196,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -222,7 +222,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -246,6 +246,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Logger\logger.cpp" />
+    <ClCompile Include="core\core.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
     <ClCompile Include="ui\ClientLogin\ClientLogin.cpp" />
@@ -270,6 +271,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\Logger\logger.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="core\core.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

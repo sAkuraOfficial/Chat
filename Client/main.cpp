@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     //a.setStyle("windowsvista");
 
-    Client w;
+    ClientLogin w;
     w.show();
     return a.exec();
 }

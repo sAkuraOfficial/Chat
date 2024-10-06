@@ -10,6 +10,8 @@ Core::Core(QObject *parent)
 }
 Core::~Core()
 {
+    delete m_pDatabase;
+    delete m_pProtocol;
 }
 
 bool Core::runServer(int port)
@@ -43,6 +45,15 @@ bool Core::runServer(int port)
 
 void Core::processLogin(QString msg, QWebSocket *sender)
 {
+    QString username;
+    QString password;
+    QJsonDocument msg_doc = QJsonDocument::fromJson(msg.toUtf8());
+    QJsonObject msg_obj = msg_doc.object();
+    username = msg_obj["username"].toString();
+    password = msg_obj["password"].toString();
+    QString log = "[登录请求]:用户名:%1\t密码:%2";
+    log=log.arg(username).arg(password);
+    Logger::getInstance().log(log);
 }
 
 void Core::processRegister(QString msg, QWebSocket *sender)
@@ -61,6 +72,7 @@ Database *Core::getDatabase()
 
 void Core::onNewMessage(QString msg, QWebSocket *sender)
 {
+    //Logger::getInstance().log(msg);
     QJsonDocument msg_doc = QJsonDocument::fromJson(msg.toUtf8());
     QJsonObject msg_obj = msg_doc.object();
     QString type = msg_obj["type"].toString();

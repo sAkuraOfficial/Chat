@@ -14,7 +14,7 @@ class Database : public QObject
 
   private:
     QSqlDatabase m_db;
-    void log(QString msg,Logger::LogLevel level);
+    void log(QString msg, Logger::LogLevel level);
   private slots:
   signals:
 };

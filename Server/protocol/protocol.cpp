@@ -8,6 +8,19 @@ Protocol::Protocol(QObject *parent)
 
 Protocol::~Protocol()
 {
+    for (QWebSocket *client : m_clients)
+    {
+        disconnect(client, nullptr, nullptr, nullptr); // 断开所有信号与槽的连接
+        client->deleteLater();                         // 标记为待删除
+    }
+    m_clients.clear(); // 清空客户端列表
+
+    // 关闭服务器
+    if (m_pWebSocketServer)
+    {
+        m_pWebSocketServer->close();       // 停止监听新连接
+        m_pWebSocketServer->deleteLater(); // 标记服务器对象为待删除
+    }
 }
 
 bool Protocol::listen(int port)
@@ -61,6 +74,8 @@ void Protocol::onDisconnected()
     if (!pClient)
         return;
     Logger::getInstance().log(QString("断开连接 %1").arg(pClient->peerAddress().toString()));
+    disconnect(pClient, nullptr, nullptr, nullptr); // 断开所有信号与槽的连接
     m_clients.removeAll(pClient);
-    pClient->deleteLater();
+    pClient->close(); // 确保连接关闭
+    delete pClient;
 }

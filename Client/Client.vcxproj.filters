@@ -11,6 +11,9 @@
     <ClCompile Include="..\Logger\logger.cpp">
       <Filter>logger</Filter>
     </ClCompile>
+    <ClCompile Include="core\core.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -56,6 +59,9 @@
     </QtMoc>
     <QtMoc Include="..\Logger\logger.h">
       <Filter>logger</Filter>
+    </QtMoc>
+    <QtMoc Include="core\core.h">
+      <Filter>core</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
