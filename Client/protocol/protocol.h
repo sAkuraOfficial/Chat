@@ -23,6 +23,6 @@ class Protocol : public QObject
     void onDisconnected();
     void onError(QAbstractSocket::SocketError error);
     void onTextMessageReceived(QString message);
-signals:
-    void newMessage(QString message);
+  signals:
+    void ReceiveNewMessage(QString message);
 };

@@ -1,17 +1,22 @@
 #include "ClientLogin.h"
+#include "../ChatMain/ClientMain.h"
 #include <QTimer>
-ClientLogin::ClientLogin(QWidget *parent)
-    : QMainWindow(parent)
+ClientLogin::ClientLogin(Core *core, QWidget *parent)
+    : QMainWindow(parent), m_core(core)
 {
     ui.setupUi(this);
-    m_core = new Core(this);
     animationTimer = new QTimer(this);
 
+    // 连接服务器
     connect(m_core, &Core::beginConnect, this, &ClientLogin::onBeginConnect);                                      // 连接开始时显示加载动画
     connect(m_core, &Core::ConnectTimeOut, this, &ClientLogin::onConnectTimeOut);                                  // 连接超时处理
     connect(m_core, &Core::ConnectSuccess, this, &ClientLogin::onConnectSuccess);                                  // 连接成功处理
     connect(m_core->getProtocol()->getWebSocket(), &QWebSocket::disconnected, this, &ClientLogin::onDisconnected); // 断开连接处理
-    m_core->runClient("ws://localhost:1234", 5000);                                                                // 连接到服务器，超时时间为5秒
+
+    // 登录
+    connect(m_core, &Core::ReceiveLoginResult, this, &ClientLogin::onReceiveLoginResult); // 处理登录结果
+
+    m_core->runClient("ws://localhost:1234", 5000); // 连接到服务器，超时时间为5秒
 
     movie = new QMovie(":/Client/login_a");
     movie_b = new QMovie(":/Client/login_b");
@@ -95,6 +100,11 @@ void ClientLogin::on_pushButton_login_clicked()
     m_core->login(ui.lineEdit_id->text(), ui.lineEdit_pwd->text());
 }
 
+void ClientLogin::on_pushButton_reg_clicked()
+{
+    m_core->registerUser(ui.lineEdit_reg_id->text(), ui.lineEdit_reg_pwd->text());
+}
+
 void ClientLogin::onBeginConnect()
 {
     ui.label_link_status->setText("服务器状态：连接中"); // 更新 QLabel 的文本
@@ -125,4 +135,21 @@ void ClientLogin::onConnectSuccess()
 void ClientLogin::onDisconnected()
 {
     ui.label_link_status->setText("服务器状态：断开连接");
+}
+
+void ClientLogin::onReceiveLoginResult(bool result)
+{
+    if (result)
+    {
+        QString username = ui.lineEdit_id->text();
+
+        emit LoginSuccess(username); // 传递登陆成功信号
+        this->close();               // 隐藏当前窗口
+    }
+    else
+    {
+        // 登录失败
+        ui.label_link_status->setText("服务器状态：登录失败");
+        ui.lineEdit_pwd->clear();
+    }
 }

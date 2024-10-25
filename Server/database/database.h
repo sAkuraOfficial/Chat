@@ -11,6 +11,7 @@ class Database : public QObject
     Database(QObject *parent = nullptr);
     ~Database();
     bool openDatabase();
+    QSqlDatabase GetDB();
 
   private:
     QSqlDatabase m_db;

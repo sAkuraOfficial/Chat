@@ -11,7 +11,7 @@ class ClientLogin : public QMainWindow
     bool eventFilter(QObject *watched, QEvent *event) override;
 
   public:
-    ClientLogin(QWidget *parent = nullptr);
+    ClientLogin(Core* core, QWidget *parent = nullptr);
     ~ClientLogin();
 
   private:
@@ -20,13 +20,17 @@ class ClientLogin : public QMainWindow
     QMovie *movie;
     QMovie *movie_b;
     bool isLoginPage = true;
-    QTimer *animationTimer = nullptr;//ÓÃÓÚ¼ÓÔØ¶¯»­µÄ¶¨Ê±Æ÷
-
+    QTimer *animationTimer = nullptr; // ç”¨äºåŠ è½½åŠ¨ç”»çš„å®šæ—¶å™¨
 
   private slots:
-    void on_pushButton_login_clicked();
-    void onBeginConnect(); // ¿ªÊ¼Á¬½Ó,ÏÔÊ¾¼ÓÔØ¶¯»­
-    void onConnectTimeOut(); // Á¬½Ó³¬Ê±
-    void onConnectSuccess(); // Á¬½Ó³É¹¦
+    void on_pushButton_login_clicked(); // ç™»å½•æŒ‰é’®
+    void on_pushButton_reg_clicked();   // æ³¨å†ŒæŒ‰é’®
+    void onBeginConnect();              // å¼€å§‹è¿æ¥,æ˜¾ç¤ºåŠ è½½åŠ¨ç”»
+    void onConnectTimeOut();            // è¿æ¥è¶…æ—¶
+    void onConnectSuccess();            // è¿æ¥æˆåŠŸ
     void onDisconnected();
+    void onReceiveLoginResult(bool result); // å¤„ç†ç™»å½•ç»“æœ
+
+  signals:
+    void LoginSuccess(QString username); // ç™»é™†æˆåŠŸï¼Œæ˜¾ç¤ºèŠå¤©çª—å£
 };

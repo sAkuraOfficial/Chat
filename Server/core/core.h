@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
-#include <database/database.h>
-#include <protocol/protocol.h>
+#include "database/database.h"
+#include "protocol/protocol.h"
 #include <qmessagebox.h>
 #include <qsqldatabase.h>
 #include <qsqlquery.h>

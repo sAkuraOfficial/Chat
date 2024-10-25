@@ -50,7 +50,7 @@ void Protocol::onDisconnected()
 
 void Protocol::onTextMessageReceived(QString message)
 {
-    emit newMessage(message);
+    emit ReceiveNewMessage(message);
 }
 
 void Protocol::sendMessage(QString msg)

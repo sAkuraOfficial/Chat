@@ -14,6 +14,9 @@
     <ClCompile Include="core\core.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="ui\ChatMain\ClientMain.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -33,6 +36,9 @@
     </Filter>
     <Filter Include="core">
       <UniqueIdentifier>{195879e3-766d-46b4-bc90-2d9e40ff6c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\ChatMain">
+      <UniqueIdentifier>{7ee82c3d-98a9-4710-90ce-3773ab9c6b7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,10 +69,16 @@
     <QtMoc Include="core\core.h">
       <Filter>core</Filter>
     </QtMoc>
+    <QtMoc Include="ui\ChatMain\ClientMain.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ui\ClientLogin\ClientLogin.ui">
       <Filter>ui\ClientLogin</Filter>
+    </QtUic>
+    <QtUic Include="ui\ChatMain\ClientMain.ui">
+      <Filter>ui\ChatMain</Filter>
     </QtUic>
   </ItemGroup>
 </Project>

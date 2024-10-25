@@ -143,6 +143,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)out\temp\$(ShortProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
@@ -151,6 +152,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='test|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)out\temp\$(ShortProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='test|Win32'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
@@ -159,6 +161,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)out\temp\$(ShortProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
@@ -249,6 +252,7 @@
     <ClCompile Include="core\core.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
+    <ClCompile Include="ui\ChatMain\ClientMain.cpp" />
     <ClCompile Include="ui\ClientLogin\ClientLogin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +271,7 @@
     <QtMoc Include="ui\ClientLogin\ClientLogin.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="ui\ChatMain\ClientMain.ui" />
     <QtUic Include="ui\ClientLogin\ClientLogin.ui" />
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +279,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="core\core.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ui\ChatMain\ClientMain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

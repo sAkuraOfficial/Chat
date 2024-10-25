@@ -1,5 +1,6 @@
 #include "logger.h"
 #include <QDateTime>
+#include<iostream>
 Logger::Logger(QObject *parent)
     : QObject(parent)
 {
@@ -13,7 +14,8 @@ void Logger::log(const QString &msg, LogLevel level)
 {
     QMutexLocker locker(&m_mutex);
     QString logString = formatLogString(msg, level);
-    qDebug() << logString;
+    
+    qDebug().noquote() << logString;
     emit newLog_Formated(logString);
     emit newLog(msg, level);
 }

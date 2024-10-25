@@ -21,6 +21,7 @@ Core::Core(QObject *parent)
         m_pProtocol->getWebSocket()->close(); // 超时关闭连接
         emit ConnectTimeOut();
     });
+    connect(m_pProtocol, &Protocol::ReceiveNewMessage, this, &Core::onReceiveNewMessage); // 接收到新消息，然后路由转发到对应处理函数
 }
 
 Core::~Core()
@@ -44,9 +45,16 @@ void Core::runClient(QString ws, int timeoutMs)
     emit beginConnect();
 }
 
-void Core::onNewMessage(QString message)
+void Core::onReceiveNewMessage(QString message)
 {
-
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+    QJsonObject json = doc.object();
+    QString type = json["type"].toString();
+    if (type == "login")
+    {
+        bool result = json["result"].toBool();
+        emit ReceiveLoginResult(result);
+    }
 }
 
 void Core::login(QString username, QString password)
@@ -57,5 +65,14 @@ void Core::login(QString username, QString password)
     json["password"] = password;
     QJsonDocument doc(json);
     m_pProtocol->sendMessage(doc.toJson());
+}
 
+void Core::registerUser(QString username, QString password)
+{
+    QJsonObject json;
+    json["type"] = "register";
+    json["username"] = username;
+    json["password"] = password;
+    QJsonDocument doc(json);
+    m_pProtocol->sendMessage(doc.toJson());
 }

@@ -14,15 +14,17 @@ class Core : public QObject
     Protocol *getProtocol();
     bool isConnecting();
     void login(QString username, QString password);
+    void registerUser(QString username, QString password);
 
   private:
     Protocol *m_pProtocol = nullptr;
     QTimer *timer = nullptr;
 
   private slots:
-    void onNewMessage(QString message);
+    void onReceiveNewMessage(QString message);
   signals:
-    void beginConnect();   // 发送开始连接信号，用于ui显示加载动画
-    void ConnectTimeOut(); // 连接超时
-    void ConnectSuccess(); // 连接成功
+    void beginConnect();                  // 发送开始连接信号，用于ui显示加载动画
+    void ConnectTimeOut();                // 连接超时
+    void ConnectSuccess();                // 连接成功
+    void ReceiveLoginResult(bool result); // 登录结果
 };

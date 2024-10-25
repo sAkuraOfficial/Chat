@@ -68,6 +68,11 @@ void Protocol::router(QString msg, QWebSocket *sender)
     emit newClientMessage(msg, sender);
 }
 
+void Protocol::sendToClient(QString msg, QWebSocket *client)
+{
+    client->sendTextMessage(msg);
+}
+
 void Protocol::onDisconnected()
 {
     QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
