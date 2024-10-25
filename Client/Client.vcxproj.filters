@@ -17,6 +17,9 @@
     <ClCompile Include="ui\ChatMain\ClientMain.cpp">
       <Filter>ui\ChatMain</Filter>
     </ClCompile>
+    <ClCompile Include="ui\ChatMain\FriendWidget.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -72,12 +75,18 @@
     <QtMoc Include="ui\ChatMain\ClientMain.h">
       <Filter>ui\ChatMain</Filter>
     </QtMoc>
+    <QtMoc Include="ui\ChatMain\FriendWidget.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ui\ClientLogin\ClientLogin.ui">
       <Filter>ui\ClientLogin</Filter>
     </QtUic>
     <QtUic Include="ui\ChatMain\ClientMain.ui">
+      <Filter>ui\ChatMain</Filter>
+    </QtUic>
+    <QtUic Include="ui\ChatMain\FriendWidget.ui">
       <Filter>ui\ChatMain</Filter>
     </QtUic>
   </ItemGroup>

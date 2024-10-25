@@ -6,6 +6,7 @@ ClientMain::ClientMain(Core *core,  QWidget *parent)
     : QMainWindow(parent), m_core(core)
 {
     ui.setupUi(this);
+
 }
 
 ClientMain::~ClientMain()

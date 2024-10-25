@@ -68,20 +68,21 @@ void Core::processLogin(QString msg, QWebSocket *sender)
     }
     else
     {
+        QJsonObject obj;
+        obj["type"] = "login";
         if (query.next())
         {
             Logger::getInstance().log("登录成功");
-            QJsonObject obj;
-            obj["type"] = "login";
             obj["result"] = true;
-            QJsonDocument doc(obj);
-            QString str(doc.toJson(QJsonDocument::Compact));
-            m_pProtocol->sendToClient(str, sender);
         }
         else
         {
             Logger::getInstance().log("登录失败");
+            obj["result"] = false;
         }
+        QJsonDocument doc(obj);
+        QString str(doc.toJson(QJsonDocument::Compact));
+        m_pProtocol->sendToClient(str, sender);
     }
 }
 

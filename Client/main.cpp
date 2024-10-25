@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    // a.setStyle("windowsvista"); // 设置风格
+     a.setStyle("windowsvista"); // 设置风格
 
     // 创建核心对象
     Core *core = new Core(); 

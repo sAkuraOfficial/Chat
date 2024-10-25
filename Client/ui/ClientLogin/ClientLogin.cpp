@@ -142,7 +142,6 @@ void ClientLogin::onReceiveLoginResult(bool result)
     if (result)
     {
         QString username = ui.lineEdit_id->text();
-
         emit LoginSuccess(username); // 传递登陆成功信号
         this->close();               // 隐藏当前窗口
     }
