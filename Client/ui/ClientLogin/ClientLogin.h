@@ -11,7 +11,7 @@ class ClientLogin : public QMainWindow
     bool eventFilter(QObject *watched, QEvent *event) override;
 
   public:
-    ClientLogin(Core* core, QWidget *parent = nullptr);
+    ClientLogin(Core *core, QWidget *parent = nullptr);
     ~ClientLogin();
 
   private:
@@ -29,8 +29,8 @@ class ClientLogin : public QMainWindow
     void onConnectTimeOut();            // 连接超时
     void onConnectSuccess();            // 连接成功
     void onDisconnected();
-    void onReceiveLoginResult(bool result); // 处理登录结果
+    void onReceiveLoginResult(bool result, int user_id); // 处理登录结果
 
   signals:
-    void LoginSuccess(QString username); // 登陆成功，显示聊天窗口
+    void LoginSuccess(QString username, int user_id); // 登陆成功，显示聊天窗口
 };

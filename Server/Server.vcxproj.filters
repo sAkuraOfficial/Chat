@@ -17,6 +17,9 @@
     <ClCompile Include="core\core.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="..\DataTypes\DataTypes.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -85,5 +88,10 @@
     <None Include="doc\Chat.sql">
       <Filter>doc</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DataTypes\DataTypes.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

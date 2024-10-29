@@ -137,13 +137,13 @@ void ClientLogin::onDisconnected()
     ui.label_link_status->setText("服务器状态：断开连接");
 }
 
-void ClientLogin::onReceiveLoginResult(bool result)
+void ClientLogin::onReceiveLoginResult(bool result, int user_id)
 {
     if (result)
     {
         QString username = ui.lineEdit_id->text();
-        emit LoginSuccess(username); // 传递登陆成功信号
-        this->close();               // 隐藏当前窗口
+        emit LoginSuccess(username, user_id); // 传递登陆成功信号
+        this->close();                        // 隐藏当前窗口
     }
     else
     {

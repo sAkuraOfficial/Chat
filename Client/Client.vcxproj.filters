@@ -20,6 +20,9 @@
     <ClCompile Include="ui\ChatMain\FriendWidget.cpp">
       <Filter>ui\ChatMain</Filter>
     </ClCompile>
+    <ClCompile Include="..\DataTypes\DataTypes.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -89,5 +92,10 @@
     <QtUic Include="ui\ChatMain\FriendWidget.ui">
       <Filter>ui\ChatMain</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\DataTypes\DataTypes.h">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

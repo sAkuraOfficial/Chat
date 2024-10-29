@@ -1,9 +1,18 @@
 #include "core.h"
+#include <DataTypes/DataTypes.h>
+#include <QJsonArray>
 #include <qjsondocument.h>
 #include <qjsonobject.h>
 #include <qjsonvalue.h>
 #include <qsqlerror.h>
 #include <qsqlquery.h>
+/*
+---------------------------编码规范---------------------------
+数据库好友列表中，USER1_ID < USER2_ID
+调用操作好友列表的时候，必须先确保USER1_ID < USER2_ID
+--------------------------------------------------------------
+*/
+
 Core::Core(QObject *parent)
     : QObject(parent)
 {
@@ -68,12 +77,17 @@ void Core::processLogin(QString msg, QWebSocket *sender)
     }
     else
     {
+        // 从sql查询结果中获取字段ID
+
         QJsonObject obj;
         obj["type"] = "login";
         if (query.next())
         {
             Logger::getInstance().log("登录成功");
+            int user_id;
+            user_id = query.value("ID").toInt();
             obj["result"] = true;
+            obj["user_id"] = user_id; // 返回用户ID（数据库用户表主键）
         }
         else
         {
@@ -112,6 +126,63 @@ void Core::processRegister(QString msg, QWebSocket *sender)
     }
 }
 
+void Core::processGetFriendList(QString msg, QWebSocket *sender)
+{
+    QJsonDocument msg_doc = QJsonDocument::fromJson(msg.toUtf8());
+    QJsonObject msg_obj = msg_doc.object();
+    int user_id = msg_obj["user_id"].toInt();
+    // 要分两种情况，一种是user_id是USER1_ID，一种是user_id是USER2_ID
+    QSqlQuery query;
+    query.prepare(R"(
+        SELECT
+	        USERS.ID,
+	        USERS.NAME,
+	        USERS.STATUS,
+	        FRIENDS.STATUS AS FRIEND_STATUS
+        FROM
+	        USERS
+        JOIN
+	        FRIENDS ON (USERS.ID=FRIENDS.USER1_ID AND FRIENDS.USER2_ID=:user1_id)
+			        OR (USERS.ID=FRIENDS.USER2_ID AND FRIENDS.USER1_ID=:user2_id)
+    )");
+    query.bindValue(":user1_id", user_id);
+    query.bindValue(":user2_id", user_id);
+    query.exec();
+    if (query.lastError().isValid())
+    {
+        Logger::getInstance().log("获取好友列表失败");
+    }
+    else
+    {
+        QVector<friend_info> friends;
+        while (query.next())
+        {
+            friend_info temp_friend;
+            temp_friend.user_id = query.value("ID").toInt();
+            temp_friend.username = query.value("NAME").toString();
+            //temp_friend.isOnline //暂时先不写
+            temp_friend.status = friend_status_code::GetStatusCode(query.value("FRIEND_STATUS").toString());
+            friends.push_back(temp_friend);
+        }
+        QJsonObject obj;
+        obj["type"] = "getFriendList";
+        QJsonArray friendArray;
+        for (auto &temp_friend : friends)
+        {
+            QJsonObject friendObj;
+            friendObj["user_id"] = temp_friend.user_id;
+            friendObj["username"] = temp_friend.username;
+            friendObj["status"] = friend_status_code::GetStatusCode(temp_friend.status);
+            friendArray.append(friendObj);
+        }
+        obj["friends"] = friendArray;
+        QJsonDocument doc(obj);
+        QString str(doc.toJson(QJsonDocument::Compact));
+        m_pProtocol->sendToClient(str, sender);
+
+    }
+}
+
 Protocol *Core::getProtocol()
 {
     return m_pProtocol;
@@ -136,6 +207,10 @@ void Core::onNewMessage(QString msg, QWebSocket *sender)
     {
         processRegister(msg, sender);
     }
+    else if (type == "getFriendList")
+    {
+        processGetFriendList(msg, sender);
+    }
     else
     {
         Logger::getInstance().log("未知消息类型");
@@ -144,12 +219,40 @@ void Core::onNewMessage(QString msg, QWebSocket *sender)
 
 // 数据库结构
 /*
-CREATE TABLE[dbo].[MSG](
-    [ID] INT IDENTITY(1, 1) NOT NULL, --主键 自增[SENDER] INT NOT NULL, --发送者[CONTENT] NVARCHAR(MAX) NOT NULL, --内容 无限长度[SEND_TIME] DATETIME2(7) CONSTRAINT[DF_MSG_SENDTIME] DEFAULT(getdate()) NOT NULL, --发送时间 默认当前时间 CONSTRAINT[PK_MSG] PRIMARY KEY CLUSTERED([ID] ASC), --主键 CONSTRAINT[FK_MSG_USER] FOREIGN KEY([SENDER]) REFERENCES[dbo].[USERS]([ID]) ON DELETE CASCADE ON UPDATE CASCADE-- 外键 SEND_ID 关联USER_ID
+-- 创建用户表
+CREATE TABLE [dbo].[USERS] (
+    [ID]     INT           IDENTITY (1, 1) NOT NULL,-- 主键   自增
+    [NAME]   NVARCHAR (50) NOT NULL,-- 用户名
+    [PWD]    NVARCHAR (50) NOT NULL,-- 密码
+    [STATUS] NVARCHAR (20) CONSTRAINT [DF_Users_Status] DEFAULT ('offline') NOT NULL,-- 状态   默认离线
+    CONSTRAINT [PK_Users_ID] PRIMARY KEY CLUSTERED ([ID] ASC),-- 主键
+    CONSTRAINT [UQ_Users_Name] UNIQUE NONCLUSTERED ([NAME] ASC),-- 唯一约束 用户名唯一
+    CONSTRAINT [CK_Users_Status] CHECK (lower([STATUS])='offline' OR lower([STATUS])='online')-- 约束  状态只能为online或offline
 );
 
-CREATE TABLE[dbo].[USERS](
-    [ID] INT IDENTITY(1, 1) NOT NULL, --主键 自增[NAME] NVARCHAR(50) NOT NULL, --用户名[PWD] NVARCHAR(50) NOT NULL, --密码[STATUS] NVARCHAR(20) CONSTRAINT[DF_Users_Status] DEFAULT('offline') NOT NULL, --状态 默认离线 CONSTRAINT[PK_Users_ID] PRIMARY KEY CLUSTERED([ID] ASC), --主键 CONSTRAINT[UQ_Users_Name] UNIQUE NONCLUSTERED([NAME] ASC), --唯一约束 用户名唯一 CONSTRAINT[CK_Users_Status] CHECK(lower([STATUS]) = 'offline' OR lower([STATUS]) = 'online')-- 约束 状态只能为online或offline
+-- 好友之间的关系
+CREATE TABLE [dbo].[FRIEND_STATUS] (
+    [STATUS_CODE] NVARCHAR(20) PRIMARY KEY,
+    [DESCRIPTION] NVARCHAR(50) NOT NULL
+);
+
+-- 插入初始状态
+INSERT INTO [dbo].[FRIEND_STATUS] (STATUS_CODE, DESCRIPTION) VALUES
+    ('pending', '待确认'),
+    ('accepted', '已接受'),
+    ('blocked', '屏蔽');
+
+
+-- 好友表，用户1与用户2两个外键作为联合主键
+CREATE TABLE [dbo].[FRIENDS] (
+    [USER1_ID] INT NOT NULL,
+    [USER2_ID] INT NOT NULL,
+    [STATUS] NVARCHAR(20) NOT NULL,
+    CONSTRAINT [PK_Friends] PRIMARY KEY ([USER1_ID], [USER2_ID]),
+    CONSTRAINT [FK_Friends_User1] FOREIGN KEY ([USER1_ID]) REFERENCES [dbo].[USERS]([ID]),
+    CONSTRAINT [FK_Friends_User2] FOREIGN KEY ([USER2_ID]) REFERENCES [dbo].[USERS]([ID]),
+    CONSTRAINT [FK_Friends_Status] FOREIGN KEY ([STATUS]) REFERENCES [dbo].[FRIEND_STATUS]([STATUS_CODE]),
+    CONSTRAINT [CK_Friends_Ordered] CHECK ([USER1_ID] < [USER2_ID]) -- 确保 USER1_ID 小于 USER2_ID
 );
 
 */

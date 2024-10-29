@@ -38,7 +38,7 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_username">
    <property name="geometry">
     <rect>
      <x>95</x>

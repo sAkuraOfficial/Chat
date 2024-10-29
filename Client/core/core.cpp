@@ -52,10 +52,19 @@ void Core::onReceiveNewMessage(QString message)
     QString type = json["type"].toString();
     if (type == "login")
     {
-        bool result = json["result"].toBool();
-        emit ReceiveLoginResult(result);
+        processLogin(json);
+    }
+    else if (type == "register")
+    {
+        processRegister(json);
+    }
+    else if (type == "getFriendList")
+    {
+        processGetFriendList(json);
     }
 }
+
+//-----------------------------------------------------发送消息-----------------------------------------------------
 
 void Core::login(QString username, QString password)
 {
@@ -75,4 +84,43 @@ void Core::registerUser(QString username, QString password)
     json["password"] = password;
     QJsonDocument doc(json);
     m_pProtocol->sendMessage(doc.toJson());
+}
+
+void Core::getFriendList(int user_id)
+{
+    QJsonObject json;
+    json["type"] = "getFriendList";
+    json["user_id"] = user_id;
+    QJsonDocument doc(json);
+    m_pProtocol->sendMessage(doc.toJson());
+}
+
+void Core::processLogin(QJsonObject msg_json)
+{
+    bool result = msg_json["result"].toBool();
+    int user_id = result ? msg_json["user_id"].toInt() : -1;
+    emit ReceiveLoginResult(result, user_id);
+}
+
+void Core::processRegister(QJsonObject msg_json)
+{
+}
+
+void Core::processGetFriendList(QJsonObject msg_json)
+{
+    QVector<friend_info> friends;
+    QJsonArray friendArray = msg_json["friends"].toArray();
+    for (int i = 0; i < friendArray.size(); i++)
+    {
+        QJsonObject friendObj = friendArray.at(i).toObject();
+        friend_info temp_friend;
+        temp_friend.user_id = friendObj["user_id"].toInt();
+        temp_friend.username = friendObj["username"].toString();
+        temp_friend.status = friend_status_code::GetStatusCode(friendObj["status"].toString());
+        temp_friend.isOnline = false;
+        temp_friend.last_message.message = "好饿呀";
+        temp_friend.last_message.time = QDateTime::currentDateTime();
+        friends.push_back(temp_friend);
+    }
+    emit ReceiveGetFriendList(friends);
 }
