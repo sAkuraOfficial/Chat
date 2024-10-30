@@ -116,14 +116,21 @@ void Core::processRegister(QString msg, QWebSocket *sender)
     query.bindValue(":username", username);
     query.bindValue(":password", password);
     query.exec();
+    QJsonObject obj;
+    obj["type"] = "register";
     if (query.lastError().isValid())
     {
         Logger::getInstance().log("注册失败");
+        obj["result"] = false;
     }
     else
     {
         Logger::getInstance().log("注册成功");
+        obj["result"] = true;
     }
+    QJsonDocument doc(obj);
+    QString str(doc.toJson(QJsonDocument::Compact));
+    m_pProtocol->sendToClient(str, sender);
 }
 
 void Core::processGetFriendList(QString msg, QWebSocket *sender)
@@ -132,6 +139,9 @@ void Core::processGetFriendList(QString msg, QWebSocket *sender)
     QJsonObject msg_obj = msg_doc.object();
     int user_id = msg_obj["user_id"].toInt();
     // 要分两种情况，一种是user_id是USER1_ID，一种是user_id是USER2_ID
+    QString log = "[获取好友列表请求]:用户ID:%1";
+    log = log.arg(user_id);
+    Logger::getInstance().log(log);
     QSqlQuery query;
     query.prepare(R"(
         SELECT
@@ -148,24 +158,29 @@ void Core::processGetFriendList(QString msg, QWebSocket *sender)
     query.bindValue(":user1_id", user_id);
     query.bindValue(":user2_id", user_id);
     query.exec();
+    QJsonObject obj;
+    obj["type"] = "getFriendList";
     if (query.lastError().isValid())
     {
         Logger::getInstance().log("获取好友列表失败");
+        obj["result"] = false;
     }
     else
     {
+        Logger::getInstance().log("获取好友列表成功");
+        obj["result"] = true;
         QVector<friend_info> friends;
+        int i = 0;
         while (query.next())
         {
             friend_info temp_friend;
             temp_friend.user_id = query.value("ID").toInt();
             temp_friend.username = query.value("NAME").toString();
-            //temp_friend.isOnline //暂时先不写
+            // temp_friend.isOnline //暂时先不写
             temp_friend.status = friend_status_code::GetStatusCode(query.value("FRIEND_STATUS").toString());
+            Logger::getInstance().log(QString("第%1个好友:%2").arg(i++).arg(temp_friend.username));
             friends.push_back(temp_friend);
         }
-        QJsonObject obj;
-        obj["type"] = "getFriendList";
         QJsonArray friendArray;
         for (auto &temp_friend : friends)
         {
@@ -176,11 +191,11 @@ void Core::processGetFriendList(QString msg, QWebSocket *sender)
             friendArray.append(friendObj);
         }
         obj["friends"] = friendArray;
-        QJsonDocument doc(obj);
-        QString str(doc.toJson(QJsonDocument::Compact));
-        m_pProtocol->sendToClient(str, sender);
-
+     
     }
+    QJsonDocument doc(obj);
+    QString str(doc.toJson(QJsonDocument::Compact));
+    m_pProtocol->sendToClient(str, sender);
 }
 
 Protocol *Core::getProtocol()

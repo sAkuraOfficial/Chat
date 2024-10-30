@@ -55,5 +55,6 @@ void Protocol::onTextMessageReceived(QString message)
 
 void Protocol::sendMessage(QString msg)
 {
+    //Logger::getInstance().log("\n" + msg);
     m_pWebSocket->sendTextMessage(msg);
 }

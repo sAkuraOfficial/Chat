@@ -1,4 +1,5 @@
 #include "core.h"
+#include "Logger/logger.h"
 #include <QEventLoop>
 #include <qjsonarray.h>
 #include <qjsondocument.h>
@@ -48,6 +49,7 @@ void Core::runClient(QString ws, int timeoutMs)
 void Core::onReceiveNewMessage(QString message)
 {
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+    //Logger::getInstance().log("\n"+ doc.toJson());
     QJsonObject json = doc.object();
     QString type = json["type"].toString();
     if (type == "login")

@@ -29,15 +29,14 @@ void ClientMain::onLoginSuccess(QString username, int user_id)
 void ClientMain::onReceiveGetFriendList(QVector<friend_info> friends)
 {
     m_friends = friends;
-    ui.listWidget->clear();
+    ui.listWidget_friends->clear();
     for (auto &temp_friend_info : m_friends)
     {
         FriendWidget *item_widget = new FriendWidget(temp_friend_info, this);
         item_widget->setFixedSize(250, 100);
-        QListWidgetItem *item = new QListWidgetItem(ui.listWidget);
-        item->setSizeHint(QSize(250, 100));
-        ui.listWidget->addItem(item);
-        ui.listWidget->setItemWidget(item, item_widget);
+        QListWidgetItem *item = new QListWidgetItem(ui.listWidget_friends);
+        item->setSizeHint(QSize(250, 75));
+        ui.listWidget_friends->addItem(item);
+        ui.listWidget_friends->setItemWidget(item, item_widget);
     }
-
 }

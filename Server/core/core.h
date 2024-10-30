@@ -18,7 +18,7 @@ class Core : public QObject
   private:
     Protocol *m_pProtocol = nullptr;
     Database *m_pDatabase = nullptr;
-    // msgÊÇjsonÏûÏ¢£¬senderÊÇ·¢ËÍÕß
+    // msgæ˜¯jsonæ¶ˆæ¯ï¼Œsenderæ˜¯å‘é€è€…
     void processLogin(QString msg, QWebSocket *sender);
     void processRegister(QString msg, QWebSocket *sender);
     void processGetFriendList(QString msg, QWebSocket *sender);
