@@ -1,7 +1,7 @@
 #pragma once
 // 客户端内核类,作为protocol与ui的中间层
-#include <DataTypes/DataTypes.h>
 #include "protocol/protocol.h"
+#include <DataTypes/DataTypes.h>
 #include <qobject.h>
 class Core : public QObject
 {
@@ -21,6 +21,7 @@ class Core : public QObject
     void processLogin(QJsonObject msg_json);
     void processRegister(QJsonObject msg_json);
     void processGetFriendList(QJsonObject msg_json);
+    void processNewMessage(QJsonObject msg_json);
 
   private:
     Protocol *m_pProtocol = nullptr;

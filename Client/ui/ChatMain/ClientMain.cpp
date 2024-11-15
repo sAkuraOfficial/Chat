@@ -39,4 +39,5 @@ void ClientMain::onReceiveGetFriendList(QVector<friend_info> friends)
         ui.listWidget_friends->addItem(item);
         ui.listWidget_friends->setItemWidget(item, item_widget);
     }
+
 }

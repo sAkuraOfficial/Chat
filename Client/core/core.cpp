@@ -49,7 +49,7 @@ void Core::runClient(QString ws, int timeoutMs)
 void Core::onReceiveNewMessage(QString message)
 {
     QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
-    //Logger::getInstance().log("\n"+ doc.toJson());
+    // Logger::getInstance().log("\n"+ doc.toJson());
     QJsonObject json = doc.object();
     QString type = json["type"].toString();
     if (type == "login")
@@ -63,6 +63,10 @@ void Core::onReceiveNewMessage(QString message)
     else if (type == "getFriendList")
     {
         processGetFriendList(json);
+    }
+    else if (type == "newMessage")
+    {
+        processNewMessage(json);
     }
 }
 
@@ -125,4 +129,9 @@ void Core::processGetFriendList(QJsonObject msg_json)
         friends.push_back(temp_friend);
     }
     emit ReceiveGetFriendList(friends);
+}
+
+void Core::processNewMessage(QJsonObject msg_json)
+{
+    Logger::getInstance().log("收到新消息" + QJsonDocument(msg_json).toJson());
 }

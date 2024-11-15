@@ -167,6 +167,16 @@
     <OutDir>$(SolutionDir)out\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)out\temp\$(ShortProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -253,8 +263,12 @@
     <ClCompile Include="core\core.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
+    <ClCompile Include="ui\ChatMain\Avatar.cpp" />
+    <ClCompile Include="ui\ChatMain\ChatWidget.cpp" />
     <ClCompile Include="ui\ChatMain\ClientMain.cpp" />
     <ClCompile Include="ui\ChatMain\FriendWidget.cpp" />
+    <ClCompile Include="ui\ChatMain\MessageBubble.cpp" />
+    <ClCompile Include="ui\ChatMain\OneMessage.cpp" />
     <ClCompile Include="ui\ClientLogin\ClientLogin.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +305,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataTypes\DataTypes.h" />
+    <QtMoc Include="ui\ChatMain\MessageBubble.h" />
+    <QtMoc Include="ui\ChatMain\Avatar.h" />
+    <QtMoc Include="ui\ChatMain\OneMessage.h" />
+    <QtMoc Include="ui\ChatMain\ChatWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

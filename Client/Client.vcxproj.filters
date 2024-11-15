@@ -23,6 +23,18 @@
     <ClCompile Include="..\DataTypes\DataTypes.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="ui\ChatMain\ChatWidget.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\OneMessage.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\Avatar.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\MessageBubble.cpp">
+      <Filter>ui\ChatMain</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ui">
@@ -79,6 +91,18 @@
       <Filter>ui\ChatMain</Filter>
     </QtMoc>
     <QtMoc Include="ui\ChatMain\FriendWidget.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\ChatWidget.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\OneMessage.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\Avatar.h">
+      <Filter>ui\ChatMain</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\MessageBubble.h">
       <Filter>ui\ChatMain</Filter>
     </QtMoc>
   </ItemGroup>

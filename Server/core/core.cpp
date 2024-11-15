@@ -88,6 +88,12 @@ void Core::processLogin(QString msg, QWebSocket *sender)
             user_id = query.value("ID").toInt();
             obj["result"] = true;
             obj["user_id"] = user_id; // 返回用户ID（数据库用户表主键）
+            client_info temp_client;
+            temp_client.user_id = user_id;
+            temp_client.username = username;
+            temp_client.isOnline = true;
+            temp_client.socket = sender;
+            m_client.push_back(temp_client);
         }
         else
         {
