@@ -19,4 +19,5 @@ class ChatWidget : public QWidget
     QVBoxLayout *m_vlayout = nullptr;
     QListView *m_list = nullptr;
     QStandardItemModel *m_data_model = nullptr;
+
 };

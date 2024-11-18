@@ -101,6 +101,8 @@ void Core::getFriendList(int user_id)
     m_pProtocol->sendMessage(doc.toJson());
 }
 
+//-----------------------------------------------------处理接收的消息-----------------------------------------------------
+
 void Core::processLogin(QJsonObject msg_json)
 {
     bool result = msg_json["result"].toBool();
@@ -134,4 +136,10 @@ void Core::processGetFriendList(QJsonObject msg_json)
 void Core::processNewMessage(QJsonObject msg_json)
 {
     Logger::getInstance().log("收到新消息" + QJsonDocument(msg_json).toJson());
+    message_info msg;
+    msg.sender.user_id = msg_json["sender_id"].toInt();
+    msg.receiver.user_id = msg_json["receiver_id"].toInt();
+    msg.message = msg_json["content"].toString();
+    msg.time = QDateTime::currentDateTime();
+    emit ReceiveUserMessage(msg);
 }

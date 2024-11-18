@@ -36,4 +36,5 @@ class Core : public QObject
     void ReceiveLoginResult(bool result, int user_id); // 登录结果
     void ReceiveRegisterResult(bool result);           // 注册结果
     void ReceiveGetFriendList(QVector<friend_info> friends);
+    void ReceiveUserMessage(message_info message);
 };

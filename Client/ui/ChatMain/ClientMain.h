@@ -1,8 +1,9 @@
 // 聊天主窗口
 #pragma once
+#include "ChatWidget.h"
 #include "ui_ClientMain.h"
-#include <QtWidgets/QMainWindow>
 #include <DataTypes/DataTypes.h>
+#include <QtWidgets/QMainWindow>
 #include <core/core.h>
 #include <qevent.h>
 #include <qmovie.h>
@@ -20,9 +21,11 @@ class ClientMain : public QMainWindow
     Core *m_core = nullptr;
     QString m_username;
     QVector<friend_info> m_friends;
+    QMap<int, ChatWidget *> m_chatWidgets; // 用于跟踪用户ID和ChatWidget的映射关系
 
   private slots:
     void onReceiveGetFriendList(QVector<friend_info> friends);
   public slots:
     void onLoginSuccess(QString username, int user_id);
+    void onReceiveUserMessage(message_info message);
 };
