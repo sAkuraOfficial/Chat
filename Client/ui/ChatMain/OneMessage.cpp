@@ -19,6 +19,7 @@ OneMessage::OneMessage(message_info message_info, bool isClient, QWidget *parent
         m_hlayout->addWidget(m_messageBubble);
         m_hlayout->addStretch();
     }
+    show();
 }
 
 OneMessage::~OneMessage()

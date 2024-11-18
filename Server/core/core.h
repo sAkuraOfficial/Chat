@@ -15,6 +15,7 @@ class Core : public QObject
     Protocol *getProtocol();
     Database *getDatabase();
     bool runServer(int port);
+    QVector<client_info> getClientList();
 
   private:
     Protocol *m_pProtocol = nullptr;
@@ -28,4 +29,5 @@ class Core : public QObject
   private slots:
     void onNewMessage(QString msg, QWebSocket *sender);
   signals:
+    void clientLogin(client_info client);
 };

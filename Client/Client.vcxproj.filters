@@ -26,14 +26,17 @@
     <ClCompile Include="ui\ChatMain\ChatWidget.cpp">
       <Filter>ui\ChatMain</Filter>
     </ClCompile>
-    <ClCompile Include="ui\ChatMain\OneMessage.cpp">
-      <Filter>ui\ChatMain</Filter>
+    <ClCompile Include="ui\ChatMain\MessageDelegate.cpp">
+      <Filter>ui\ChatMain\chat</Filter>
     </ClCompile>
     <ClCompile Include="ui\ChatMain\Avatar.cpp">
-      <Filter>ui\ChatMain</Filter>
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\OneMessage.cpp">
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
     </ClCompile>
     <ClCompile Include="ui\ChatMain\MessageBubble.cpp">
-      <Filter>ui\ChatMain</Filter>
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +60,12 @@
     </Filter>
     <Filter Include="ui\ChatMain">
       <UniqueIdentifier>{7ee82c3d-98a9-4710-90ce-3773ab9c6b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\ChatMain\chat">
+      <UniqueIdentifier>{b97b2e27-695f-41df-92eb-61cabdaceaaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ui\ChatMain\chat\弃用的代码">
+      <UniqueIdentifier>{e812b5ba-10b2-487d-8ab8-167c0af9c277}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,14 +105,17 @@
     <QtMoc Include="ui\ChatMain\ChatWidget.h">
       <Filter>ui\ChatMain</Filter>
     </QtMoc>
-    <QtMoc Include="ui\ChatMain\OneMessage.h">
-      <Filter>ui\ChatMain</Filter>
+    <QtMoc Include="ui\ChatMain\MessageDelegate.h">
+      <Filter>ui\ChatMain\chat</Filter>
     </QtMoc>
     <QtMoc Include="ui\ChatMain\Avatar.h">
-      <Filter>ui\ChatMain</Filter>
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\OneMessage.h">
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
     </QtMoc>
     <QtMoc Include="ui\ChatMain\MessageBubble.h">
-      <Filter>ui\ChatMain</Filter>
+      <Filter>ui\ChatMain\chat\弃用的代码</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@ Avatar::Avatar(user_info user_info, QWidget *parent)
     QPixmap pixmap;
     pixmap.loadFromData(ba);
     m_avatar->setPixmap(pixmap);
+    m_avatar->setGeometry(0, 0, 54, 54);
+    m_avatar->show();
 }
 
 Avatar::~Avatar()

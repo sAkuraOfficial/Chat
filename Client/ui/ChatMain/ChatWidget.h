@@ -1,16 +1,16 @@
 #pragma once
-#include "OneMessage.h"
-#include <DataTypes/DataTypes.h>
-#include <QtWidgets/QMainWindow>
-#include <qlayout.h>
-#include <qlistview.h>
-#include <qstandarditemmodel.h>
+#include "MessageDelegate.h"
+#include <DataTypes/DataTypes.h> // 假设 message_info 和 friend_info 定义在这里
+#include <QListView>
+#include <QStandardItemModel>
+#include <QVBoxLayout>
+#include <QWidget>
+
 class ChatWidget : public QWidget
 {
     Q_OBJECT
-  protected:
   public:
-    ChatWidget(friend_info friend_info, QWidget *parent = nullptr);
+    explicit ChatWidget(friend_info friend_info, QWidget *parent = nullptr);
     ~ChatWidget();
     void AddMessage(message_info message);
 
@@ -19,7 +19,4 @@ class ChatWidget : public QWidget
     QVBoxLayout *m_vlayout = nullptr;
     QListView *m_list = nullptr;
     QStandardItemModel *m_data_model = nullptr;
-  private slots:
-  public slots:
-  signals:
 };

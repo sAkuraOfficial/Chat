@@ -268,6 +268,20 @@
     <ClCompile Include="ui\ChatMain\ClientMain.cpp" />
     <ClCompile Include="ui\ChatMain\FriendWidget.cpp" />
     <ClCompile Include="ui\ChatMain\MessageBubble.cpp" />
+    <ClCompile Include="ui\ChatMain\MessageDelegate.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='test|Win32'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='test|Win32'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='test|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='test|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="ui\ChatMain\OneMessage.cpp" />
     <ClCompile Include="ui\ClientLogin\ClientLogin.cpp" />
   </ItemGroup>
@@ -305,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataTypes\DataTypes.h" />
+    <QtMoc Include="ui\ChatMain\MessageDelegate.h" />
     <QtMoc Include="ui\ChatMain\MessageBubble.h" />
     <QtMoc Include="ui\ChatMain\Avatar.h" />
     <QtMoc Include="ui\ChatMain\OneMessage.h" />

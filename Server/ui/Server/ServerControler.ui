@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1495</width>
-    <height>444</height>
+    <width>590</width>
+    <height>797</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,13 +48,92 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListView" name="listView_userList">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>40</y>
+      <x>10</x>
+      <y>436</y>
       <width>141</width>
-      <height>391</height>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>176</x>
+      <y>492</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>接受消息用户：</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_send_msg">
+    <property name="geometry">
+     <rect>
+      <x>166</x>
+      <y>536</y>
+      <width>415</width>
+      <height>211</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>176</x>
+      <y>446</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>模拟发送用户：</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_send_msg">
+    <property name="geometry">
+     <rect>
+      <x>166</x>
+      <y>756</y>
+      <width>415</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认发送</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_sender">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>447</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_receiver">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>490</y>
+      <width>261</width>
+      <height>31</height>
      </rect>
     </property>
    </widget>

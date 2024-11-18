@@ -1,15 +1,26 @@
-// 聊天主窗口
 #include "ChatWidget.h"
+#include <QStandardItem>
+
 ChatWidget::ChatWidget(friend_info friend_info, QWidget *parent)
     : QWidget(parent), m_friend_info(friend_info)
 {
+    // 初始化布局和视图
     m_vlayout = new QVBoxLayout(this);
-    this->setLayout(m_vlayout);
-    m_vlayout->addWidget(m_list);
+    m_list = new QListView(this);
+    m_data_model = new QStandardItemModel(this);
 
-    m_data_model = new QStandardItemModel();
+    // 设置委托
+    MessageDelegate *delegate = new MessageDelegate(this);
+    m_list->setItemDelegate(delegate);
     m_list->setModel(m_data_model);
 
+    // 配置视图
+    m_list->setSelectionMode(QAbstractItemView::SingleSelection);
+    m_list->setUniformItemSizes(true);
+
+    // 将列表视图添加到布局
+    m_vlayout->addWidget(m_list);
+    this->setLayout(m_vlayout);
 }
 
 ChatWidget::~ChatWidget()
@@ -18,16 +29,8 @@ ChatWidget::~ChatWidget()
 
 void ChatWidget::AddMessage(message_info message)
 {
-    user_info sender = message.sender;
-    user_info receiver = message.receiver;
-    if (sender.username == m_friend_info.username)
-    {
-        // 对方发来的消息
-        OneMessage *oneMessage = new OneMessage(message, false, this);
-    }
-    else if (receiver.username == m_friend_info.username)
-    {
-        // 自己发出的消息
-        OneMessage *oneMessage = new OneMessage(message, true, this);
-    }
+    QStandardItem *item = new QStandardItem();
+    item->setData(QVariant::fromValue(message), Qt::UserRole);
+    item->setEditable(false);
+    m_data_model->appendRow(item);
 }

@@ -55,6 +55,11 @@ bool Core::runServer(int port)
     return true;
 }
 
+QVector<client_info> Core::getClientList()
+{
+    return m_client;
+}
+
 void Core::processLogin(QString msg, QWebSocket *sender)
 {
     QString username;
@@ -94,6 +99,7 @@ void Core::processLogin(QString msg, QWebSocket *sender)
             temp_client.isOnline = true;
             temp_client.socket = sender;
             m_client.push_back(temp_client);
+            emit clientLogin(temp_client);
         }
         else
         {
@@ -203,6 +209,8 @@ void Core::processGetFriendList(QString msg, QWebSocket *sender)
     QString str(doc.toJson(QJsonDocument::Compact));
     m_pProtocol->sendToClient(str, sender);
 }
+
+
 
 Protocol *Core::getProtocol()
 {
