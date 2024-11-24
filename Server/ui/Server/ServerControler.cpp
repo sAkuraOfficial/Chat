@@ -159,18 +159,18 @@ void ServerControler::on_pushButton_send_msg_clicked()
         return;
     }
 
-    // 找到发送者对应的 WebSocket 连接
-    QWebSocket *senderSocket = nullptr;
+    // 找到接收者对应的 WebSocket 连接
+    QWebSocket *receiverSocket = nullptr;
     for (const client_info &client : m_server->getClientList())
     {
-        if (client.user_id == sender_id)
+        if (client.user_id == receiver_id)
         {
-            senderSocket = client.socket;
+            receiverSocket = client.socket;
             break;
         }
     }
 
-    if (!senderSocket)
+    if (!receiverSocket)
     {
         Logger::getInstance().log("无法找到发送者的连接", Logger::ERROR);
         QMessageBox::warning(this, "发送失败", "发送者未连接！");
@@ -179,7 +179,7 @@ void ServerControler::on_pushButton_send_msg_clicked()
 
     // 构建 JSON 消息
     QJsonObject msgObj;
-    msgObj["type"] = "newMessage";       // 修改消息类型为 "newMessage"
+    msgObj["type"] = "newChatMessage";       // 修改消息类型为 "newMessage"
     msgObj["sender_id"] = sender_id;     // 发送者ID
     msgObj["receiver_id"] = receiver_id; // 接收者ID
     msgObj["content"] = message;         // 消息内容
@@ -188,6 +188,6 @@ void ServerControler::on_pushButton_send_msg_clicked()
     QString jsonString = doc.toJson(QJsonDocument::Compact);
 
     // 使用 Core 的协议类发送消息
-    m_server->getProtocol()->sendToClient(jsonString, senderSocket);
+    m_server->getProtocol()->sendToClient(jsonString, receiverSocket);
     Logger::getInstance().log(QString("消息已发送: 发送者ID:%1 接收者ID:%2 内容:%3").arg(sender_id).arg(receiver_id).arg(message));
 }

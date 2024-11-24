@@ -64,7 +64,7 @@ void Core::onReceiveNewMessage(QString message)
     {
         processGetFriendList(json);
     }
-    else if (type == "newMessage")
+    else if (type == "newChatMessage")
     {
         processNewMessage(json);
     }
@@ -99,6 +99,22 @@ void Core::getFriendList(int user_id)
     json["user_id"] = user_id;
     QJsonDocument doc(json);
     m_pProtocol->sendMessage(doc.toJson());
+}
+
+void Core::sendMessage(message_info message)
+{
+    QJsonObject json;
+    json["type"] = "newChatMessage";
+    json["sender_id"] = message.sender.user_id;
+    json["receiver_id"] = message.receiver.user_id;
+    json["content"] = message.message;
+    QJsonDocument doc(json);
+    m_pProtocol->sendMessage(doc.toJson());
+}
+
+void Core::setClientUserInfo(user_info *client_user_info)
+{
+    m_client_user_info = client_user_info;
 }
 
 //-----------------------------------------------------处理接收的消息-----------------------------------------------------
@@ -141,5 +157,6 @@ void Core::processNewMessage(QJsonObject msg_json)
     msg.receiver.user_id = msg_json["receiver_id"].toInt();
     msg.message = msg_json["content"].toString();
     msg.time = QDateTime::currentDateTime();
+    msg.receiver_is_client = m_client_user_info->user_id == msg.receiver.user_id;
     emit ReceiveUserMessage(msg);
 }

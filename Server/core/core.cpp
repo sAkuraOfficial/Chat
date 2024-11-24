@@ -210,6 +210,62 @@ void Core::processGetFriendList(QString msg, QWebSocket *sender)
     m_pProtocol->sendToClient(str, sender);
 }
 
+void Core::processChatMessage(QString msg, QWebSocket *sender)
+{
+    QJsonDocument msgDoc = QJsonDocument::fromJson(msg.toUtf8());
+    QJsonObject msgObj = msgDoc.object();
+
+    // 判断消息类型是否为 "newMessage"
+    if (msgObj["type"].toString() == "newChatMessage")
+    {
+        // 解析消息内容
+        int senderId = msgObj["sender_id"].toInt();
+        int receiverId = msgObj["receiver_id"].toInt();
+        QString content = msgObj["content"].toString();
+
+        Logger::getInstance().log(QString("[消息处理]: 发送者ID:%1 接收者ID:%2 内容:%3")
+                                      .arg(senderId)
+                                      .arg(receiverId)
+                                      .arg(content));
+
+        // 检查接收者是否在线
+        QWebSocket *receiverSocket = nullptr;
+        for (const auto &client : m_client)
+        {
+            if (client.user_id == receiverId && client.isOnline)
+            {
+                receiverSocket = client.socket;
+                break;
+            }
+        }
+
+        if (receiverSocket)
+        {
+            // 接收者在线，转发消息
+            QJsonObject forwardMsg;
+            forwardMsg["type"] = "newChatMessage";
+            forwardMsg["sender_id"] = senderId;
+            forwardMsg["receiver_id"] = receiverId;
+            forwardMsg["content"] = content;
+
+            QJsonDocument forwardDoc(forwardMsg);
+            QString forwardStr = forwardDoc.toJson(QJsonDocument::Compact);
+
+            m_pProtocol->sendToClient(forwardStr, receiverSocket);
+
+            Logger::getInstance().log("[消息转发成功]: 消息已转发给接收者");
+        }
+        else
+        {
+            // 接收者不在线
+            Logger::getInstance().log("[消息处理失败]: 接收者不在线");
+        }
+    }
+    else
+    {
+        Logger::getInstance().log("[消息处理失败]: 未知消息类型");
+    }
+}
 
 
 Protocol *Core::getProtocol()
@@ -239,6 +295,10 @@ void Core::onNewMessage(QString msg, QWebSocket *sender)
     else if (type == "getFriendList")
     {
         processGetFriendList(msg, sender);
+    }
+    else if (type == "newChatMessage")
+    {
+        processChatMessage(msg, sender);
     }
     else
     {

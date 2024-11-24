@@ -25,6 +25,7 @@ class Core : public QObject
     void processLogin(QString msg, QWebSocket *sender);
     void processRegister(QString msg, QWebSocket *sender);
     void processGetFriendList(QString msg, QWebSocket *sender);
+    void processChatMessage(QString msg, QWebSocket *sender);
 
   private slots:
     void onNewMessage(QString msg, QWebSocket *sender);

@@ -57,6 +57,7 @@ struct message_info
     QString message;
     user_info sender;
     user_info receiver;
+    bool receiver_is_client;
     QDateTime time; // 年月日时分秒
 };
 

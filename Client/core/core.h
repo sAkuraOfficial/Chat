@@ -9,13 +9,15 @@ class Core : public QObject
   public:
     Core(QObject *parent = nullptr);
     ~Core();
-
-    void runClient(QString ws, int timeoutMs); // 第二个参数：连接超时时间
     Protocol *getProtocol();
     bool isConnecting();
+    void setClientUserInfo(user_info* client_user_info);//仅可由ClientMain设置
+    void runClient(QString ws, int timeoutMs); // 第二个参数：连接超时时间
+
     void login(QString username, QString password);
     void registerUser(QString username, QString password);
     void getFriendList(int user_id);
+    void sendMessage(message_info message);
 
     // 处理接收到的消息,msg是接收到的json消息
     void processLogin(QJsonObject msg_json);
@@ -26,6 +28,7 @@ class Core : public QObject
   private:
     Protocol *m_pProtocol = nullptr;
     QTimer *timer = nullptr;
+    user_info* m_client_user_info;
 
   private slots:
     void onReceiveNewMessage(QString message);

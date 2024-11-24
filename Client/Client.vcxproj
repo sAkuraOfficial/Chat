@@ -264,6 +264,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="protocol\protocol.cpp" />
     <ClCompile Include="ui\ChatMain\Avatar.cpp" />
+    <ClCompile Include="ui\ChatMain\ChatMessageList.cpp" />
     <ClCompile Include="ui\ChatMain\ChatWidget.cpp" />
     <ClCompile Include="ui\ChatMain\ClientMain.cpp" />
     <ClCompile Include="ui\ChatMain\FriendWidget.cpp" />
@@ -301,6 +302,7 @@
     <QtMoc Include="ui\ClientLogin\ClientLogin.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="ui\ChatMain\ChatWidget.ui" />
     <QtUic Include="ui\ChatMain\ClientMain.ui" />
     <QtUic Include="ui\ChatMain\FriendWidget.ui" />
     <QtUic Include="ui\ClientLogin\ClientLogin.ui" />
@@ -319,11 +321,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\DataTypes\DataTypes.h" />
+    <QtMoc Include="ui\ChatMain\ChatWidget.h" />
     <QtMoc Include="ui\ChatMain\MessageDelegate.h" />
     <QtMoc Include="ui\ChatMain\MessageBubble.h" />
     <QtMoc Include="ui\ChatMain\Avatar.h" />
     <QtMoc Include="ui\ChatMain\OneMessage.h" />
-    <QtMoc Include="ui\ChatMain\ChatWidget.h" />
+    <QtMoc Include="ui\ChatMain\ChatMessageList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

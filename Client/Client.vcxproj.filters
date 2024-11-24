@@ -23,9 +23,6 @@
     <ClCompile Include="..\DataTypes\DataTypes.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="ui\ChatMain\ChatWidget.cpp">
-      <Filter>ui\ChatMain</Filter>
-    </ClCompile>
     <ClCompile Include="ui\ChatMain\MessageDelegate.cpp">
       <Filter>ui\ChatMain\chat</Filter>
     </ClCompile>
@@ -37,6 +34,12 @@
     </ClCompile>
     <ClCompile Include="ui\ChatMain\MessageBubble.cpp">
       <Filter>ui\ChatMain\chat\弃用的代码</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\ChatMessageList.cpp">
+      <Filter>ui\ChatMain\chat</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChatMain\ChatWidget.cpp">
+      <Filter>ui\ChatMain\chat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,9 +105,6 @@
     <QtMoc Include="ui\ChatMain\FriendWidget.h">
       <Filter>ui\ChatMain</Filter>
     </QtMoc>
-    <QtMoc Include="ui\ChatMain\ChatWidget.h">
-      <Filter>ui\ChatMain</Filter>
-    </QtMoc>
     <QtMoc Include="ui\ChatMain\MessageDelegate.h">
       <Filter>ui\ChatMain\chat</Filter>
     </QtMoc>
@@ -117,6 +117,12 @@
     <QtMoc Include="ui\ChatMain\MessageBubble.h">
       <Filter>ui\ChatMain\chat\弃用的代码</Filter>
     </QtMoc>
+    <QtMoc Include="ui\ChatMain\ChatMessageList.h">
+      <Filter>ui\ChatMain\chat</Filter>
+    </QtMoc>
+    <QtMoc Include="ui\ChatMain\ChatWidget.h">
+      <Filter>ui\ChatMain\chat</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ui\ClientLogin\ClientLogin.ui">
@@ -127,6 +133,9 @@
     </QtUic>
     <QtUic Include="ui\ChatMain\FriendWidget.ui">
       <Filter>ui\ChatMain</Filter>
+    </QtUic>
+    <QtUic Include="ui\ChatMain\ChatWidget.ui">
+      <Filter>ui\ChatMain\chat</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
