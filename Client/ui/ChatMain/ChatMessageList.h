@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QWheelEvent>
 #include <QWidget>
+#include<QEvent>
 /*
 ---------------------------编码规范---------------------------
 ChatMessageList在ChatWidget中被使用
@@ -24,7 +25,8 @@ class ChatMessageList : public QWidget
     int getFriendId();
 
   protected:
-    void wheelEvent(QWheelEvent *event) override; // 重写滚轮事件，支持平滑滚动
+    void wheelEvent(QWheelEvent *event) override; // 重写鼠标滚轮事件
+
 
   private:
     friend_info m_friend_info;

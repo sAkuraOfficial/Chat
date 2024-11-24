@@ -1,4 +1,6 @@
 #include "MessageDelegate.h"
+// é™æ€å˜é‡åˆå§‹åŒ–
+int MessageDelegate::m_fontSize = 12; // é»˜è®¤å­—ä½“å¤§å°ä¸º12
 
 MessageDelegate::MessageDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
@@ -10,26 +12,34 @@ void MessageDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
 
-    // ´ÓÄ£ĞÍÖĞ»ñÈ¡ÏûÏ¢ĞÅÏ¢
+    // ä»æ¨¡å‹ä¸­è·å–æ¶ˆæ¯ä¿¡æ¯
     message_info message = index.data(Qt::UserRole).value<message_info>();
     QRect rect = option.rect;
 
-    // »æÖÆ±³¾°
+    // ç»˜åˆ¶èƒŒæ™¯
     painter->setPen(Qt::NoPen);
-    painter->setBrush(option.state & QStyle::State_Selected ? QColor(235, 235, 235) : QColor(245, 245, 245));
+    painter->setBrush(option.state & QStyle::State_Selected ? QColor(245, 245, 245) : QColor(245, 245, 245));
     painter->drawRect(rect);
 
-    // Í·ÏñÇøÓò
+    // è®¾ç½®æ–‡å­—å­—ä½“å’Œå¤§å°
+    QFont customFont = option.font;      // è·å–å½“å‰å­—ä½“
+    customFont.setPointSize(m_fontSize); // ä½¿ç”¨é™æ€å˜é‡ç®¡ç†å­—ä½“å¤§å°
+    painter->setFont(customFont);        // åº”ç”¨å­—ä½“
+
+    // åŠ¨æ€è°ƒæ•´å†…è¾¹è·
+    int bubblePadding = m_fontSize; // æ ¹æ®å­—ä½“å¤§å°è°ƒæ•´æ°”æ³¡å†…è¾¹è·
+    int fixedAvatarMargin = 15;     // å›ºå®šçš„å¤´åƒä¸æ°”æ³¡ä¹‹é—´çš„è·ç¦»
+
+    // å¤´åƒåŒºåŸŸ
     int avatarSize = 40;
     QRect avatarRect;
 
-    // ÏûÏ¢ÆøÅİÇøÓò
-    int bubbleMargin = 15;
+    // æ¶ˆæ¯æ°”æ³¡åŒºåŸŸ
     QColor bubbleColor;
 
-    // ¶¯Ì¬¼ÆËãÎÄ±¾¿í¶ÈºÍ¸ß¶È
-    int textMaxWidth = rect.width() - avatarSize - bubbleMargin * 2; // ¿ÉÓÃ¿í¶È
-    QFontMetrics metrics(option.font);
+    // åŠ¨æ€è®¡ç®—æ–‡æœ¬å®½åº¦å’Œé«˜åº¦
+    int textMaxWidth = rect.width() - avatarSize - fixedAvatarMargin * 2; // å¯ç”¨å®½åº¦
+    QFontMetrics metrics(customFont);
     QString displayText = message.message;
     QRect textRect = metrics.boundingRect(0, 0, textMaxWidth, 0, Qt::TextWordWrap, displayText);
 
@@ -37,39 +47,39 @@ void MessageDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
 
     if (message.receiver_is_client)
     {
-        // ºÃÓÑ·¢ËÍ£¨ÆøÅİÔÚ×ó²à£©
+        // å¥½å‹å‘é€ï¼ˆæ°”æ³¡åœ¨å·¦ä¾§ï¼‰
         bubbleColor = QColor(137, 217, 97);
         avatarRect = QRect(rect.left() + 5, rect.top() + 5, avatarSize, avatarSize);
         bubbleRect = QRect(
-            rect.left() + avatarSize + bubbleMargin, // ÆøÅİÆğµã
-            rect.top() + 5,                          // ÆøÅİ¶¥²¿
-            textRect.width() + 20,                   // ÆøÅİ¿í¶È
-            textRect.height() + 20                   // ÆøÅİ¸ß¶È
+            rect.left() + avatarSize + fixedAvatarMargin, // æ°”æ³¡èµ·ç‚¹ï¼Œå¤´åƒä¸æ°”æ³¡ä¹‹é—´ä¿æŒå›ºå®šè·ç¦»
+            rect.top() + 5,                               // æ°”æ³¡é¡¶éƒ¨
+            textRect.width() + bubblePadding * 2,         // æ°”æ³¡å®½åº¦
+            textRect.height() + bubblePadding * 2         // æ°”æ³¡é«˜åº¦
         );
     }
     else
     {
-        // ¿Í»§¶Ë·¢ËÍ£¨ÆøÅİÔÚÓÒ²à£©
+        // å®¢æˆ·ç«¯å‘é€ï¼ˆæ°”æ³¡åœ¨å³ä¾§ï¼‰
         bubbleColor = QColor(235, 235, 235);
         avatarRect = QRect(rect.right() - avatarSize - 5, rect.top() + 5, avatarSize, avatarSize);
         bubbleRect = QRect(
-            rect.right() - avatarSize - bubbleMargin - textRect.width() - 20, // ÆøÅİÆğµã
-            rect.top() + 5,                                                   // ÆøÅİ¶¥²¿
-            textRect.width() + 20,                                            // ÆøÅİ¿í¶È
-            textRect.height() + 20                                            // ÆøÅİ¸ß¶È
+            rect.right() - avatarSize - fixedAvatarMargin - textRect.width() - bubblePadding * 2, // æ°”æ³¡èµ·ç‚¹
+            rect.top() + 5,                                                                       // æ°”æ³¡é¡¶éƒ¨
+            textRect.width() + bubblePadding * 2,                                                 // æ°”æ³¡å®½åº¦
+            textRect.height() + bubblePadding * 2                                                 // æ°”æ³¡é«˜åº¦
         );
     }
 
-    // »æÖÆÍ·Ïñ
-    painter->drawPixmap(avatarRect, QPixmap(":/Client/profile")); // Ìæ»»ÎªÊµ¼ÊÍ·ÏñÂ·¾¶
+    // ç»˜åˆ¶å¤´åƒ
+    painter->drawPixmap(avatarRect, QPixmap(":/Client/profile")); // æ›¿æ¢ä¸ºå®é™…å¤´åƒè·¯å¾„
 
-    // »æÖÆÆøÅİ±³¾°
+    // ç»˜åˆ¶æ°”æ³¡èƒŒæ™¯
     painter->setBrush(bubbleColor);
     painter->setPen(Qt::NoPen);
     painter->drawRoundedRect(bubbleRect, 10, 10);
 
-    // ÏÔÊ¾ÎÄ±¾
-    QRect adjustedTextRect = bubbleRect.adjusted(10, 10, -10, -10); // ÆøÅİÄÚ±ß¾à
+    // æ˜¾ç¤ºæ–‡æœ¬
+    QRect adjustedTextRect = bubbleRect.adjusted(bubblePadding, bubblePadding, -bubblePadding, -bubblePadding); // æ°”æ³¡å†…è¾¹è·
     painter->setPen(Qt::black);
     painter->drawText(adjustedTextRect, Qt::TextWordWrap, displayText);
 
@@ -77,26 +87,43 @@ void MessageDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
 }
 
 
+void MessageDelegate::setFontSize(int fontSize)
+{
+    m_fontSize = fontSize;
+}
+
+int MessageDelegate::getFontSize()
+{
+    return m_fontSize;
+}
+
 QSize MessageDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    // ´ÓÄ£ĞÍÖĞ»ñÈ¡ÏûÏ¢ĞÅÏ¢
+    // ä»æ¨¡å‹ä¸­è·å–æ¶ˆæ¯ä¿¡æ¯
     message_info message = index.data(Qt::UserRole).value<message_info>();
     QString displayText = QString("%1: %2").arg(message.sender.username).arg(message.message);
 
-    // ¼ÆËã¿ÉÓÃ¿í¶È
-    int avatarWidth = 50;                                              // Í·Ïñ¿í¶È
-    int margin = 20;                                                   // ÆøÅİ×óÓÒ±ß¾à
-    int textMaxWidth = option.rect.width() - avatarWidth - margin * 2; // ¼ÆËãÆøÅİ×î´ó¿í¶È
+    // è‡ªå®šä¹‰å­—ä½“
+    QFont customFont = option.font;
+    customFont.setPointSize(m_fontSize); // ä½¿ç”¨é™æ€å˜é‡ç®¡ç†å­—ä½“å¤§å°
+    QFontMetrics metrics(customFont);
 
-    // Ê¹ÓÃ QFontMetrics ¼ÆËãÎÄ±¾¸ß¶È
-    QFontMetrics metrics(option.font);
+    // åŠ¨æ€è°ƒæ•´å†…è¾¹è·
+    int bubblePadding = m_fontSize; // æ ¹æ®å­—ä½“å¤§å°è°ƒæ•´æ°”æ³¡å†…è¾¹è·
+    int fixedAvatarMargin = 10;     // å›ºå®šçš„å¤´åƒä¸æ°”æ³¡ä¹‹é—´çš„è·ç¦»
+
+    // è®¡ç®—å¯ç”¨å®½åº¦
+    int avatarWidth = 50;                                                         // å¤´åƒå®½åº¦
+    int textMaxWidth = option.rect.width() - avatarWidth - fixedAvatarMargin * 2; // è®¡ç®—æ°”æ³¡æœ€å¤§å®½åº¦
+
     QRect textRect = metrics.boundingRect(0, 0, textMaxWidth, 0, Qt::TextWordWrap, displayText);
     int textHeight = textRect.height();
 
-    // Í·ÏñÓëÆøÅİÖ®¼äµÄ¼ä¾à
+    // å¤´åƒä¸æ°”æ³¡ä¹‹é—´çš„é—´è·
     int avatarHeight = 50;
-    int padding = 20; // ¶¥²¿ºÍµ×²¿¶îÍâµÄ¼ä¾à
-    int bubbleHeight = qMax(avatarHeight, textHeight + padding);
+    int bubbleHeight = textHeight + bubblePadding * 2; // æ ¹æ®å­—ä½“å¤§å°åŠ¨æ€è°ƒæ•´æ°”æ³¡é«˜åº¦
 
-    return QSize(option.rect.width(), bubbleHeight); // ·µ»ØĞĞµÄ×Ü¿í¶ÈºÍ¶¯Ì¬¸ß¶È
+    int totalHeight = qMax(avatarHeight, bubbleHeight); // ç¡®ä¿æ°”æ³¡é«˜åº¦è‡³å°‘ç­‰äºå¤´åƒé«˜åº¦
+
+    return QSize(option.rect.width(), totalHeight); // è¿”å›è¡Œçš„æ€»å®½åº¦å’ŒåŠ¨æ€é«˜åº¦
 }

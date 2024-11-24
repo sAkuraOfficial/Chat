@@ -29,6 +29,9 @@ ChatMessageList::ChatMessageList(friend_info friend_info, QWidget *parent)
     // 调整滚动条单步步长
     m_list->verticalScrollBar()->setSingleStep(10); // 每次滚动 10 像素
     m_list->horizontalScrollBar()->setSingleStep(10);
+    // 设置滚动条常驻
+    m_list->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    m_list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // 将列表视图添加到布局
     m_vlayout->addWidget(m_list);
@@ -38,15 +41,28 @@ ChatMessageList::ChatMessageList(friend_info friend_info, QWidget *parent)
         background-color:rgb(245, 245, 245);
         border:0px;
     }
+
+  #listView_message::item {
+        background-color: rgb(245, 245, 245); /* 普通背景颜色 */
+    }
+
+     #listView_message::item:selected {
+        background-color: rgb(245, 245, 245); /* 选中时的背景颜色 */
+    }
+
+     #listView_message::item:hover {
+        background-color: rgb(245, 245, 245); /* 选中时的背景颜色 */
+    }
+
     QScrollBar:vertical {
         background: #f0f0f0; /* 背景颜色 */
-        width: 10px; /* 滚动条宽度 */
+        width: 5px; /* 滚动条宽度 */
         margin: 22px 0 22px 0; /* 上下边距 */
     }
 
     QScrollBar::handle:vertical {
         background: #c0c0c0; /* 滑块颜色 */
-        border-radius: 5px; /* 圆角 */
+        border-radius: 2px; /* 圆角 */
     }
 
     QScrollBar::handle:vertical:hover {
@@ -78,9 +94,11 @@ ChatMessageList::ChatMessageList(friend_info friend_info, QWidget *parent)
     )");
 }
 
+
 ChatMessageList::~ChatMessageList()
 {
 }
+
 
 void ChatMessageList::AddMessage(message_info message)
 {
